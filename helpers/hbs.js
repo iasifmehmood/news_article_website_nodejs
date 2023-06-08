@@ -18,7 +18,7 @@ module.exports = {
     return input.replace(/<(?:.|\n)*?>/gm, '');
   },
   editIcon: function (storyUser, loggedUser, storyId, floating = true) {
-    console.log(storyUser, storyId, loggedUser);
+    // console.log(storyUser, storyId, loggedUser);
     if (storyUser === loggedUser.id) {
       if (floating) {
         return `<a href="/stories/edit/${storyId}" class="btn-floating halfway-fab blue"><i class="fas fa-edit fa-small"></i></a>`;
@@ -29,16 +29,16 @@ module.exports = {
       return '';
     }
   },
-  // select: function (selected, options) {
-  //   return options
-  //     .fn(this)
-  //     .replace(
-  //       new RegExp(' value="' + selected + '"'),
-  //       '$& selected="selected"'
-  //     )
-  //     .replace(
-  //       new RegExp('>' + selected + '</option>'),
-  //       ' selected="selected"$&'
-  //     );
-  // },
+  select: function (selected, options) {
+    return options
+      .fn(this)
+      .replace(
+        new RegExp(' value="' + selected + '"'),
+        '$& selected="selected"'
+      )
+      .replace(
+        new RegExp('>' + selected + '</option>'),
+        ' selected="selected"$&'
+      );
+  },
 };

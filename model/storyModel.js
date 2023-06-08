@@ -19,19 +19,14 @@ exports.getPublicStories = async () => {
   return QueryDB('select * from stories where status = ?', [status]);
 };
 
-// exports.getAllUsers = async () => {
-//   return QueryDB('select * from users');
-// };
-// exports.getSingleUser = async userId => {
-//   return QueryDB('select * from users where id = ?', [userId]);
-// };
+exports.editStory = async storyId => {
+  return QueryDB('select * from stories where id = ?', [storyId]);
+};
 
-// exports.updateUser = async (vals, userId) => {
+// exports.updateStory = async (vals, storyId) => {
 //   let query = 'update users SET ';
 //   let queryParams = [];
 //   let fieldsToUpdate = [];
-
-//   if (vals.password) vals.password = await bcrypt.hash(vals.password, 13);
 
 //   for (const [key, value] of Object.entries(vals)) {
 //     fieldsToUpdate.push(`${key} = ?`);
@@ -39,7 +34,30 @@ exports.getPublicStories = async () => {
 //   }
 //   query += fieldsToUpdate.join(', ');
 //   query += ' WHERE id = ?';
-//   queryParams.push(userId);
+//   queryParams.push(storyId);
+
+//   return QueryDB(query, queryParams);
+// };
+
+// exports.getAllUsers = async () => {
+//   return QueryDB('select * from users');
+// };
+// exports.getSingleUser = async userId => {
+//   return QueryDB('select * from users where id = ?', [userId]);
+// };
+
+// exports.updateStory = async (vals, storyId) => {
+//   let query = 'update users SET ';
+//   let queryParams = [];
+//   let fieldsToUpdate = [];
+
+//   for (const [key, value] of Object.entries(vals)) {
+//     fieldsToUpdate.push(`${key} = ?`);
+//     queryParams.push(value);
+//   }
+//   query += fieldsToUpdate.join(', ');
+//   query += ' WHERE id = ?';
+//   queryParams.push(storyId);
 
 //   return QueryDB(query, queryParams);
 // };
