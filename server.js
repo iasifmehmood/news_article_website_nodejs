@@ -6,7 +6,13 @@ const Routes = require('./routes/route.js');
 const { engine } = require('express-handlebars');
 const path = require('path');
 const mysqlStore = require('express-mysql-session')(session);
-
+const {
+  formatDate,
+  stripTags,
+  truncate,
+  editIcon,
+  select,
+} = require('./helpers/hbs.js');
 const app = express();
 require('dotenv').config();
 require('./controller/auth.js');
@@ -16,7 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //handlebars
-app.engine('.hbs', engine({ extname: '.hbs' }));
+app.engine(
+  '.hbs',
+  engine({
+    helpers: { formatDate, stripTags, truncate, editIcon, select },
+    extname: '.hbs',
+  })
+);
 app.set('view engine', '.hbs');
 app.set('views', './views');
 
@@ -48,6 +60,17 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Set global var
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  res.locals.image =
+    req.user && req.user.photos && req.user.photos.length > 0
+      ? req.user.photos[0].value
+      : null;
+  // console.log(res.locals.user, 'res.locals.user');
+  next();
+});
 
 app.use('/', Routes);
 

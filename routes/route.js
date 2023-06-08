@@ -3,7 +3,11 @@ const passport = require('passport');
 const { login } = require('../controller/login');
 const { dashboard } = require('../controller/dashboard');
 const { isGuest, isAuth } = require('../middleware/auth');
-const { stories, addStory } = require('../controller/stories');
+const {
+  stories,
+  addStory,
+  getPublicStories,
+} = require('../controller/stories');
 
 const Router = express.Router();
 
@@ -18,6 +22,8 @@ Router.get('/dashboard', isAuth, dashboard);
 Router.get('/stories', isAuth, stories);
 
 Router.post('/stories', isAuth, addStory);
+
+Router.get('/public', isAuth, getPublicStories);
 
 //google route
 

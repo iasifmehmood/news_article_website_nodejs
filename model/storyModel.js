@@ -1,14 +1,22 @@
 const QueryDB = require('../config/db_config.js');
 
-exports.addStory = async story => {
+exports.addStory = async (story, user) => {
   //   console.log(story, user);
-  const { title, body, status, user } = story;
-  console.log(title, body, status, user);
-  const user_id = parseInt(user);
+  const { title, body, status } = story;
+  // console.log(title, body, status, user);
   return QueryDB(
     'INSERT into stories (title, body, status, user_id) values(?,?,?,?) ',
-    [title, body, status, user_id]
+    [title, body, status, user]
   );
+};
+
+exports.getAllStories = async () => {
+  return QueryDB('select * from stories');
+};
+
+exports.getPublicStories = async () => {
+  const status = 'public';
+  return QueryDB('select * from stories where status = ?', [status]);
 };
 
 // exports.getAllUsers = async () => {
