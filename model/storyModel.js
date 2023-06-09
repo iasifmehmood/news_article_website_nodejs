@@ -23,6 +23,20 @@ exports.editStory = async storyId => {
   return QueryDB('select * from stories where id = ?', [storyId]);
 };
 
+exports.updateStory = (storyData, storyId) => {
+  const { title, body, status } = storyData;
+  return QueryDB('Update stories SET title=?, body=?, status=? where id=? ', [
+    title,
+    body,
+    status,
+    storyId,
+  ]);
+};
+
+exports.deleteUser = async storyId => {
+  return QueryDB(`delete from stories where id = ?`, [storyId]);
+};
+
 // exports.updateStory = async (vals, storyId) => {
 //   let query = 'update users SET ';
 //   let queryParams = [];

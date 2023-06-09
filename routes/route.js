@@ -9,6 +9,7 @@ const {
   getPublicStories,
   editStory,
   updateStory,
+  deleteStory,
 } = require('../controller/stories');
 
 const Router = express.Router();
@@ -26,6 +27,10 @@ Router.get('/stories', isAuth, stories);
 Router.post('/stories', isAuth, addStory);
 
 Router.get('/stories/edit/:id', isAuth, editStory); //open single story
+
+Router.put('/stories/edit/:id', isAuth, updateStory);
+
+Router.delete('/stories/:id', isAuth, deleteStory);
 
 Router.get('/public', isAuth, getPublicStories);
 
