@@ -1,5 +1,16 @@
 <h6>Dashboard</h6>
 <h3>Welcome {{name}}</h3>
+<div>
+  <a
+    href='http://localhost:5000/stories'
+    class='btn btn-float'
+    style='display: inline; float: right;'
+  >
+    Create Article
+    <i class='fas fa-plus'></i>
+  </a>
+</div>
+
 <p>here are your articles</p>
 
 {{#if stories}}

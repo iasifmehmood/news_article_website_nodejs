@@ -16,6 +16,7 @@ exports.stories = (req, res) => {
 
 exports.addStory = async (req, res) => {
   try {
+    console.log('in the addstory');
     req.body.user = req.user.id;
     let user = req.body.user;
     await addStory(req.body, user);

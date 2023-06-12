@@ -25,7 +25,10 @@ exports.getPublicStories = async () => {
 };
 
 exports.getSingleStory = async storyId => {
-  return QueryDB('select * from stories where id = ?', [storyId]);
+  return QueryDB(
+    'SELECT *, stories.id AS story_id FROM stories INNER JOIN users ON stories.user_id = users.id WHERE stories.id =?',
+    [storyId]
+  );
 };
 
 exports.editStory = async storyId => {
@@ -38,10 +41,10 @@ exports.getStoryID = async storyId => {
 
 exports.getStoriesByUser = userId => {
   const status = 'public';
-  return QueryDB('SELECT * FROM stories WHERE user_id = ? AND status = ?', [
-    userId,
-    status,
-  ]);
+  return QueryDB(
+    'SELECT *, stories.id AS story_id FROM stories INNER JOIN users ON stories.user_id = users.id WHERE user_id = ? AND status = ?',
+    [userId, status]
+  );
 };
 
 exports.updateStory = (storyData, storyId) => {
