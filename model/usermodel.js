@@ -24,3 +24,7 @@ exports.updateLastAccess = last_accessed => {
 exports.getUserDetails = email => {
   return QueryDB('SELECT * FROM stories WHERE email = ?', [email]);
 };
+
+// exports.getImageFromUser = userID => {
+//   return QueryDB('SELECT * FROM USERS WHERE id= ?', [userID]);
+// };

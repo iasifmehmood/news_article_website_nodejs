@@ -77,10 +77,11 @@ app.use(passport.session());
 // Set global var
 app.use(function (req, res, next) {
   res.locals.user = req.user || null;
-  res.locals.image =
-    req.user && req.user.photos && req.user.photos.length > 0
-      ? req.user.photos[0].value
-      : null;
+  // res.locals.image =
+  //   req.user && req.user.photos && req.user.photos.length > 0
+  //     ? req.user.photos[0].value
+  //     : null;
+  // console.log(res.locals.image);
   // console.log(res.locals.user, 'res.locals.user');
   next();
 });

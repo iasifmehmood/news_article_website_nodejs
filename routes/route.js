@@ -10,6 +10,8 @@ const {
   editStory,
   updateStory,
   deleteStory,
+  getSingleStory,
+  getStoriesByUser,
 } = require('../controller/stories');
 
 const Router = express.Router();
@@ -33,6 +35,10 @@ Router.put('/stories/edit/:id', isAuth, updateStory);
 Router.delete('/stories/:id', isAuth, deleteStory);
 
 Router.get('/public', isAuth, getPublicStories);
+
+Router.get('/stories/:id', isAuth, getSingleStory);
+
+Router.get('/stories/user/:id', isAuth, getStoriesByUser);
 
 //google route
 

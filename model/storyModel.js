@@ -10,17 +10,38 @@ exports.addStory = async (story, user) => {
   );
 };
 
-exports.getAllStories = async () => {
-  return QueryDB('select * from stories');
+exports.getAllStories = async userID => {
+  return QueryDB('select * from stories WHERE user_id=?', [userID]);
 };
 
 exports.getPublicStories = async () => {
   const status = 'public';
-  return QueryDB('select * from stories where status = ?', [status]);
+  return QueryDB(
+    'SELECT *, stories.id AS story_id FROM stories INNER JOIN users ON stories.user_id = users.id WHERE stories.status =?',
+    [status]
+  );
+
+  // return QueryDB('select * from stories where status = ?', [status]);
+};
+
+exports.getSingleStory = async storyId => {
+  return QueryDB('select * from stories where id = ?', [storyId]);
 };
 
 exports.editStory = async storyId => {
   return QueryDB('select * from stories where id = ?', [storyId]);
+};
+
+exports.getStoryID = async storyId => {
+  return QueryDB('select * from stories where id = ?', [storyId]);
+};
+
+exports.getStoriesByUser = userId => {
+  const status = 'public';
+  return QueryDB('SELECT * FROM stories WHERE user_id = ? AND status = ?', [
+    userId,
+    status,
+  ]);
 };
 
 exports.updateStory = (storyData, storyId) => {
@@ -36,46 +57,3 @@ exports.updateStory = (storyData, storyId) => {
 exports.deleteUser = async storyId => {
   return QueryDB(`delete from stories where id = ?`, [storyId]);
 };
-
-// exports.updateStory = async (vals, storyId) => {
-//   let query = 'update users SET ';
-//   let queryParams = [];
-//   let fieldsToUpdate = [];
-
-//   for (const [key, value] of Object.entries(vals)) {
-//     fieldsToUpdate.push(`${key} = ?`);
-//     queryParams.push(value);
-//   }
-//   query += fieldsToUpdate.join(', ');
-//   query += ' WHERE id = ?';
-//   queryParams.push(storyId);
-
-//   return QueryDB(query, queryParams);
-// };
-
-// exports.getAllUsers = async () => {
-//   return QueryDB('select * from users');
-// };
-// exports.getSingleUser = async userId => {
-//   return QueryDB('select * from users where id = ?', [userId]);
-// };
-
-// exports.updateStory = async (vals, storyId) => {
-//   let query = 'update users SET ';
-//   let queryParams = [];
-//   let fieldsToUpdate = [];
-
-//   for (const [key, value] of Object.entries(vals)) {
-//     fieldsToUpdate.push(`${key} = ?`);
-//     queryParams.push(value);
-//   }
-//   query += fieldsToUpdate.join(', ');
-//   query += ' WHERE id = ?';
-//   queryParams.push(storyId);
-
-//   return QueryDB(query, queryParams);
-// };
-
-// exports.deleteUser = async userId => {
-//   return QueryDB(`delete from users where id = ?`, [userId]);
-// };

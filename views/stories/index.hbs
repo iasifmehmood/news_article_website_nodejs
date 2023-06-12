@@ -25,7 +25,7 @@
     <div class='col s12 m4'>
       <div class='card'>
         <div class='card-image'>
-          {{{editIcon user_id ../user id}}}
+          {{{editIcon user_id ../user story_id}}}
 
         </div>
         <div class='card-content center-align'>
@@ -33,12 +33,13 @@
           <p>{{stripTags (truncate body 150)}}</p>
           <br />
           <div class='chip'>
-             <img src='{{../image}}' alt='image' />
-            <a href='/stories/user/{{user.id}}'>{{../user.displayName}}</a>
+            {{!-- <div>../  means  getting outside loop and gettteing global variable res.locals.image</div> --}}
+             <img src='{{image}}' alt='image' /> 
+            <a href='/stories/user/{{user_id}}'>{{name}}</a>
           </div>
         </div>
         <div class='card-action center-align'>
-          <a href='/stories/{{id}}' class='btn grey'>Read More</a>
+          <a href='/stories/{{story_id}}' class='btn grey'>Read More</a>
         </div>
       </div>
     </div>
